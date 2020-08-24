@@ -14,8 +14,8 @@
 
 ## API Usage 
 1. Inquirer API -- require package and configure prompts 
-2. USA Jobs
-    * Secure an API Key 
+2. USAJobs.gov
+    * API Key - ************
     * Base URL: https://data.usajobs.gov/api/search
     * Req Header Params: Host, User Agent, Auth Key
     * Query Params to Append to BaseURL: 
@@ -28,7 +28,7 @@
     * BaseURL: https://content.guardianapis.com/search?q=debates
     * See Query Operators: "https://open-platform.theguardian.com/documentation/"
 4. Teleport API: 
-    * Base URL for Qual. of Life Scores: GET /urban_areas/{ua_id}/scores/ ... (slug:atlanta) --> ****city.toLowerCase(). ****
+    * Base URL for Qual. of Life Scores: GET /urban_areas/{ua_id}/scores/ ... (slug:atlanta) --> only accepts lowercase city name query in ua id. --> ****city.toLowerCase(). ****
         - Ex. req.url for Atlanta : https://api.teleport.org/api/urban_areas/slug%3Aatlanta/scores/
     * No API Key Needed
 5. Weather API: 
