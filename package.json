@@ -1,0 +1,17 @@
+{
+  "name": "retport",
+  "version": "1.0.0",
+  "description": "## This application is a backend application that allows its users who have retired or are planning retirement to successfully plan out their life in retirement. Through async calls to different API's, users can determine the best cities to retire in based on aggregate data and metadata.",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "inquirer": "^7.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
