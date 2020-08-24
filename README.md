@@ -1,6 +1,8 @@
 # RetPort (A Backend Retirement Portfolio) 
 
-## This application is a backend application that allows its users who have retired or are planning retirement to successfully plan out their life in retirement. Through async calls to different API's, users can determine the best cities to retire in based on aggregate data and metadata. 
+## This application is a backend application that allows its users who have retired or are planning retirement to successfully plan out their life in retirement. Through async calls to different API's, users can determine the best cities to retire in based on aggregate data and metadata.
+
+## Based on the users' preferences, a JSON Object Model will be tailored for them that will represent what city is best and/or what their city of chouce has to offer them in retirement. 
 
 
 
@@ -9,27 +11,20 @@
   * Readable and Writeable Streams 
   * Promises 
   * Process.Argv 
+  * JSON Parsing
   * Request/Reponse Cycle 
   * fs module in Node
-  * Inquirer
+  * Inquirer (questions in console)
   * Dotenv Package and Environment Variables 
   * gitignore
   * MomentJS 
   * Using and Building API's 
 
   ## Web API's/ Sources
-    * 
-
-
-
-
-	* Different Cities' Crime Data/Metadata
-	* Real Time and Predictive Weather Data
-	* Access to Health Centers Nearby
-	* IEX Live Stock Market Data
-	* USA Job Board (All Jobs available in US)
-	* News by Search (From '99)
-	* Quality of Life Scores (Out of 10) by City for: 
+    1. Weather API (WeatherChannel)
+	2. News by Search/Tags (The Guardian)
+	3. Job Openings in the USA (USAjobs.gov)
+	4. Teleport API: Quality of Life Scores (Out of 10) by City for: 
 		* Housing 
 		* Cost of Living 
 		* Startups Ease of Entry 
