@@ -57,6 +57,9 @@ inquirer.prompt([ {
 // console.log(quotes); 
 
 
+module.exports = userData; 
+
+
 
 
 
