@@ -12,16 +12,27 @@ var jobsKey = keys.jobsKey
 var newsKey = keys.newsKey; 
 
 // Set up inquirer for console queries and to capture inputs. 
+let userData = []; 
 
 inquirer.prompt([ {
     type: "input", 
     message: "Welcome! What is your name", 
     name: "Username"
+}, {
+    type: "checkbox", 
+    message: "What do you classify yourself as?", 
+    choices: ["retired", "soon to retire"], 
+    name: "retirement_status"
 }
 ]).then(answers => {
-    console.log(answers["Username"]);
+   let userName = (answers["Username"]);
+   
+
 })
 
+
+
+// console.log(userName); 
 
 
 // console.log(quotes); 
