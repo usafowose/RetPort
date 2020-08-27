@@ -33,3 +33,19 @@
     * No API Key Needed
 5. Weather API: 
     *
+
+-------------------------------------------------
+
+## Implementation
+1. Inquirer for original setup 
+    - Create user object with name, age, current city of residence, and desired city of retirement. 
+    - require responses
+    - Export UserDataArr with UserObj. 
+
+2. Axios for HTTP Requests to API
+    - Import userData Object for calls 
+    - Parse JSON object into async axios requests
+    - Store Responses as Data Ojects
+
+3. Scripts
+    - Include scripts in package.json file to synchronously run all js files (inquirer, axios reqs, streams to file)
