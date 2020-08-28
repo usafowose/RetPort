@@ -28,7 +28,9 @@ class Person {
         }
         let stream = fs.createWriteStream('././user.txt');
         stream.write(JSON.stringify(userObj));
-
+        // stream.end( () => {
+        //     console.log('Stream completed'); 
+        // }); 
     }
 };
 var inquire = () => {
@@ -68,8 +70,8 @@ var inquire = () => {
 
 };
 
-
-module.exports = inquire();
+inquire(); 
+// module.exports = inquire; 
 // console.log(userName);
 
 
