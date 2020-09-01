@@ -70,7 +70,7 @@ var inquire = () => {
 
 };
 
-inquire(); 
+inquire();
 // module.exports = inquire; 
 // console.log(userName);
 
