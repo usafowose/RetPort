@@ -4,7 +4,7 @@
    Occupation?
    Do You Know Where You Want To Retire? 
     - If so, where? If not, move on. 
-    * No DB, just stream responses through fs module to json file. 
+    * No DB, just stream responses through fs module to txt file. 
 
 2. If a retiree doesn't have many retirement plans yet, this app would be hard to implement without suggestions. 
 
