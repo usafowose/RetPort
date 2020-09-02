@@ -1,5 +1,5 @@
 const axios = require('axios');
-const fs = require('fs'); 
+const fs = require('fs');
 const keys = require("./Config/keys");
 const { encode } = require('punycode');
 
@@ -8,13 +8,28 @@ const { encode } = require('punycode');
 
 // inquire(); 
 
-var stream = fs.createReadStream('./user.txt');
+
 var jobsKey = keys.jobsKey
 var newsKey = keys.newsKey;
 
-let userData =[]; 
+var userData = [];
 
-stream.on('data', (err, data) => {
-    if (err) {throw err}
-    userData.push(JSON.parse(data));
-})
+// var stream = fs.readFile('./user.txt', { encoding: 'utf-8' }, (err, data) => {
+//     if (err) { console.log(err) }
+//     data = JSON.parse(data);
+//     userData.push(data)
+
+// });
+
+let data = fs.readFileSync('./user.txt', {encoding: 'utf-8'}); 
+data = JSON.parse(data);
+
+console.log(data); 
+
+
+//  console.log(...userData); 
+
+
+
+
+
