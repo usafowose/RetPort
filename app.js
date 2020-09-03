@@ -14,7 +14,7 @@ const newsKey = keys.newsKey;
 let quoteNum = Math.floor(Math.random()*31); 
 let thisQuote = `quote${quoteNum}`;
 
-console.table(` \n --------------- \n ${quotes[thisQuote]}`); 
+console.table(` \n --------------- \n ${quotes[thisQuote]} \n --------------- \n `); 
 
 // Sync File Read, JSON parsing,decoding and Assignment to Data Variable 
 let data = JSON.parse(
@@ -23,12 +23,14 @@ let data = JSON.parse(
 
 var userName = data.name
 var userStatus = data.status; 
-var currentCity = data.current_city;
-var desiredMove = data.dest_choices; 
+var currentCity = data.current_city.toLowerCase();
+var desiredMove = data.desiredMove.toLowerCase(); 
+
+
 
 // HTTP Get Requests via Axios Package to API's 
 
-axios.get('https://api.teleport.org/api/urban_areas/slug%3Aatlanta/scores').then(response => {
+axios.get('https://api.teleport.org/api/urban_areas/slug:atlanta/scores').then(response => {
     console.log(response.data)
 }).catch(err => console.log(err)); 
 
@@ -39,3 +41,4 @@ axios.get('https://api.teleport.org/api/urban_areas/slug%3Aatlanta/scores').then
 
 
 
+    
