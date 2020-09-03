@@ -13,18 +13,20 @@ require("dotenv").config();
 // Set up inquirer for console queries and to capture inputs. ucfc
 class Person {
 
-    constructor(name, status, currentCity, desiredMove) {
+    constructor(name, status, currentCity, desiredMove, jobNeeded) {
         this.name = name;
         this.status = status;
         this.currentCity = currentCity;
         this.desiredMove = desiredMove;
+        this.jobNeeded = jobNeeded;
     }
     createObj() {
         let userObj = {
             name: this.name,
             status: this.status,
             current_city: this.currentCity,
-            desiredMove: this.desiredMove
+            desiredMove: this.desiredMove,
+            jobNeeded: this.jobNeeded
         }
         let stream = fs.createWriteStream('././user.txt');
         stream.write(JSON.stringify(userObj));
@@ -66,8 +68,9 @@ var inquire = () => {
         let status = answers["retirement_status"][0];
         let current_city = answers["current_city"];
         let dest_choices = answers["destination_choics"];
+        let jobNeeded = answers["job_search"];
 
-        let persObj = new Person(userName, status, current_city, dest_choices);
+        let persObj = new Person(userName, status, current_city, dest_choices, jobNeeded);
         persObj.createObj();
     }).catch((err) => {
         console.log(err)
