@@ -28,17 +28,23 @@ var desiredMove = data.desiredMove.toLowerCase();
 
 
 
-// HTTP Get Requests via Axios Package to API's 
-
+// HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) 
 axios.get('https://api.teleport.org/api/urban_areas/slug:atlanta/scores').then(response => {
     console.log(response.data)
 }).catch(err => console.log(err)); 
 
 
+// HTTP Get Request for Local News
+
+axios.get('') 
+
+
+// HTTP Get Req for Certain Jobs ***Use Inquirer?
 
 
 
 
 
 
-    
+
+

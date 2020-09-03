@@ -27,7 +27,7 @@
     * API Key : xxxxxx
     * BaseURL: https://content.guardianapis.com/search?q=debates
     * See Query Operators: "https://open-platform.theguardian.com/documentation/"
-4. Teleport API: 
+4. Teleport API: z
     * Base URL for Qual. of Life Scores: GET /urban_areas/{ua_id}/scores/ ... (slug:atlanta) --> only accepts lowercase city name query in ua id. --> ****city.toLowerCase(). ****
         - Ex. req.url for Atlanta : https://api.teleport.org/api/urban_areas/slug%3Aatlanta/scores/
     * No API Key Needed
