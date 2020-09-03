@@ -55,6 +55,11 @@ var inquire = () => {
             type: "input",
             message: "Where have you thought of retiring? (Up to 3, separated by semicolons i.e. Chicago, IL; Achorage, AL)",
             name: "destination_choics"
+        }, 
+        {
+            type: 'confirm', 
+            message: 'Do you intend to find work in the city to which you retire?', 
+            name: 'job_search'
         }
     ]).then(answers => {
         let userName = (answers["Username"]);
