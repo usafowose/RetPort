@@ -12,10 +12,10 @@ const jobsKey = keys.jobsKey
 const newsKey = keys.newsKey;
 
 // Randomly selecting quotes to display to user 
-let quoteNum = Math.floor(Math.random()*31); 
+let quoteNum = Math.floor(Math.random() * 31);
 let thisQuote = `quote${quoteNum}`;
 
-console.table(` \n --------------- \n ${quotes[thisQuote]} \n --------------- \n `); 
+console.table(` \n --------------- \n ${quotes[thisQuote]} \n --------------- \n `);
 
 // Sync File Read, JSON parsing,decoding and Assignment to Data Variable 
 let data = JSON.parse(
@@ -23,12 +23,12 @@ let data = JSON.parse(
 );
 
 let userName = data.name
-let userStatus = data.status; 
+let userStatus = data.status;
 let currentCity = data.current_city.toLowerCase();
-let desiredMove = data.desiredMove.toLowerCase().split(",")[0]; 
-    if (desiredMove.split(" ")[1]) {
-        desiredMove = `${desiredMove.split(" ")[0]}-${desiredMove.split(" ")[1]}`; 
-    }
+let desiredMove = data.desiredMove.toLowerCase().split(",")[0];
+if (desiredMove.split(" ")[1]) {
+    desiredMove = `${desiredMove.split(" ")[0]}-${desiredMove.split(" ")[1]}`;
+}
 console.log(desiredMove);
 
 
@@ -39,14 +39,13 @@ console.log(desiredMove);
 axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
     let rawData = response.data.categories;
     inquire.prompt({
-        type: "checkbox", 
-        message: 'What is the most important quality of your retirement city?', 
-        choices: ['Housing', 'Cost of Living', 'Startup Ability', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom', 'Safety', 'Healthcare', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet Access','Leisure & Culture', 'Tolerance', 'Outdoors'], 
+        type: "checkbox",
+        message: 'What is the most important quality of your retirement city?',
+        choices: ['Housing', 'Cost of Living', 'Startup Ability', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom', 'Safety', 'Healthcare', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet Access', 'Leisure & Culture', 'Tolerance', 'Outdoors'],
         name: 'qualityOne'
     }).then(answers => {
-        console.log(answers['qualityOne']); 
+        console.log(answers['qualityOne']);
         for (let x in rawData) {
-            console.log(x);
             if (rawData[x].name === answers['qualityOne'][0]) {
                 console.log(rawData[x].score_out_of_10);
                 break;
@@ -54,7 +53,7 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
         }
         // console.log(rawData)
     });
-}).catch(err => console.log(err)); 
+}).catch(err => console.log(err));
 
 
 // HTTP Get Request for Local News
