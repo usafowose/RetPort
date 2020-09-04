@@ -37,6 +37,7 @@ console.log(desiredMove);
 // HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) 
 
 axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
+    let rawData = response.data.categories;
     inquire.prompt({
         type: "checkbox", 
         message: 'What is the most important quality of your retirement city?', 
@@ -44,7 +45,14 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
         name: 'qualityOne'
     }).then(answers => {
         console.log(answers['qualityOne']); 
-        console.log(response.data.categories)
+        for (let x in rawData) {
+            console.log(x);
+            if (rawData[x].name === answers['qualityOne'][0]) {
+                console.log(rawData[x].score_out_of_10);
+                break;
+            }
+        }
+        // console.log(rawData)
     });
 }).catch(err => console.log(err)); 
 
