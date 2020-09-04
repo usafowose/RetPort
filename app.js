@@ -25,26 +25,29 @@ let data = JSON.parse(
 var userName = data.name
 var userStatus = data.status; 
 var currentCity = data.current_city.toLowerCase();
-var desiredMove = data.desiredMove.toLowerCase(); 
+var desiredMove = data.desiredMove.toLowerCase().split(",")[0]; 
+console.log(desiredMove);
+
 
 
 
 // HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) 
-axios.get('https://api.teleport.org/api/urban_areas/slug:atlanta/scores').then(response => {
-    
 
-    inquire.prompt({
-        type: "checkbox", 
-        message: 'What is the most imprtant quality of your retirement city?', 
-        choices: []
-    })
+axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
+
+
+    // inquire.prompt({
+    //     type: "checkbox", 
+    //     message: 'What is the most imprtant quality of your retirement city?', 
+    //     choices: []
+    // })
     console.log(response.data)
 }).catch(err => console.log(err)); 
 
 
 // HTTP Get Request for Local News
 
-axios.get('') 
+// axios.get('') 
 
 
 // HTTP Get Req for Certain Jobs ***Use Inquirer?
