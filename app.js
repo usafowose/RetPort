@@ -26,7 +26,7 @@ let userName = data.name
 let userStatus = data.status; 
 let currentCity = data.current_city.toLowerCase();
 let desiredMove = data.desiredMove.toLowerCase().split(",")[0]; 
-    if (typeof desiredMove.split(" ")[1]) {
+    if (desiredMove.split(" ")[1]) {
         desiredMove = (`${desiredMove.split(" ")[0]}-${desiredMove.split(" ")[1]}`); 
         console.log(desiredMove)
     }

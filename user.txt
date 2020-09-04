@@ -1,1 +1,1 @@
-{"name":"Andrew ","status":"Retired","current_city":"Miami, FL","desiredMove":"San Diego, CA","jobNeeded":false}
+{"name":"Andrew ","status":"Retired","current_city":"Miami, FL","desiredMove":"New York, NY","jobNeeded":true}
