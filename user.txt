@@ -1,1 +1,1 @@
-{"name":"Andrew Fowose","status":"Retired","current_city":"Miami, FL","desiredMove":"Miami, FL","jobNeeded":true}
+{"name":"Andrew","status":"Retired","current_city":"Miami, FL","desiredMove":"Atlanta, GA","jobNeeded":true}

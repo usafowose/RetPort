@@ -26,8 +26,9 @@ let userName = data.name
 let userStatus = data.status;
 let currentCity = data.current_city.toLowerCase();
 let desiredMove = data.desiredMove.toLowerCase().split(",")[0];
+// If city has two parts (i.e. Los Angeles, Las Vegas, etc split and rejoin with  )
 if (desiredMove.split(" ")[1]) {
-    desiredMove = `${desiredMove.split(" ")[0]}-${desiredMove.split(" ")[1]}`;
+    desiredMove = `${desiredMove.split(" ").join('-')}`;
 }
 console.log(desiredMove);
 
@@ -38,15 +39,17 @@ console.log(desiredMove);
 
 axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
     let rawData = response.data.categories;
+    console.log(rawData);
     inquire.prompt({
         type: "checkbox",
         message: 'What is the most important quality of your retirement city?',
-        choices: ['Housing', 'Cost of Living', 'Startup Ability', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom', 'Safety', 'Healthcare', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet Access', 'Leisure & Culture', 'Tolerance', 'Outdoors'],
+        choices: ['Housing', 'Cost of Living', 'Startups', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom', 'Safety', 'Healthcare', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet Access', 'Leisure & Culture', 'Tolerance', 'Outdoors'],
         name: 'qualityOne'
     }).then(answers => {
         console.log(answers['qualityOne']);
         for (let x in rawData) {
-            if (rawData[x].name === answers['qualityOne'][0]) {
+            console.log(`index:${x}\n DataName: ${rawData[x].name}\n myAnswer: ${answers.qualityOne[0]}`)
+            if (rawData[x].name == answers.qualityOne[0]) {
                 console.log(rawData[x].score_out_of_10);
                 break;
             }
