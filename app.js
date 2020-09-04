@@ -5,6 +5,7 @@ const keys = require("./Config/keys");
 const cTable = require('console.table');
 const { encode } = require('punycode');
 const quotes = require('./Model/quotes');
+const inquire = require('inquirer');
 
 // Importing API Keys from env for axios calls
 const jobsKey = keys.jobsKey
@@ -30,6 +31,13 @@ var desiredMove = data.desiredMove.toLowerCase();
 
 // HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) 
 axios.get('https://api.teleport.org/api/urban_areas/slug:atlanta/scores').then(response => {
+    
+
+    inquire.prompt({
+        type: "checkbox", 
+        message: 'What is the most imprtant quality of your retirement city?', 
+        choices: []
+    })
     console.log(response.data)
 }).catch(err => console.log(err)); 
 
