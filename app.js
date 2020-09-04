@@ -27,10 +27,9 @@ let userStatus = data.status;
 let currentCity = data.current_city.toLowerCase();
 let desiredMove = data.desiredMove.toLowerCase().split(",")[0]; 
     if (desiredMove.split(" ")[1]) {
-        desiredMove = (`${desiredMove.split(" ")[0]}-${desiredMove.split(" ")[1]}`); 
-        console.log(desiredMove)
+        desiredMove = `${desiredMove.split(" ")[0]}-${desiredMove.split(" ")[1]}`; 
     }
-// console.log(desiredMove);
+console.log(desiredMove);
 
 
 
@@ -38,14 +37,15 @@ let desiredMove = data.desiredMove.toLowerCase().split(",")[0];
 // HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) 
 
 axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
-
-
-    // inquire.prompt({
-    //     type: "checkbox", 
-    //     message: 'What is the most imprtant quality of your retirement city?', 
-    //     choices: []
-    // })
-    console.log(response.data.categories)
+    inquire.prompt({
+        type: "checkbox", 
+        message: 'What is the most important quality of your retirement city?', 
+        choices: ['Housing', 'Cost of Living', 'Startup Ability', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom', 'Safety', 'Healthcare', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet Access','Leisure & Culture', 'Tolerance', 'Outdoors'], 
+        name: 'qualityOne'
+    }).then(answers => {
+        console.log(answers['qualityOne']); 
+        console.log(response.data.categories)
+    });
 }).catch(err => console.log(err)); 
 
 
