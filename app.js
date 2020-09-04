@@ -22,11 +22,15 @@ let data = JSON.parse(
     fs.readFileSync('./user.txt', { encoding: 'utf-8' })
 );
 
-var userName = data.name
-var userStatus = data.status; 
-var currentCity = data.current_city.toLowerCase();
-var desiredMove = data.desiredMove.toLowerCase().split(",")[0]; 
-console.log(desiredMove);
+let userName = data.name
+let userStatus = data.status; 
+let currentCity = data.current_city.toLowerCase();
+let desiredMove = data.desiredMove.toLowerCase().split(",")[0]; 
+    if (typeof desiredMove.split(" ")[1]) {
+        desiredMove = (`${desiredMove.split(" ")[0]}-${desiredMove.split(" ")[1]}`); 
+        console.log(desiredMove)
+    }
+// console.log(desiredMove);
 
 
 
@@ -41,7 +45,7 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
     //     message: 'What is the most imprtant quality of your retirement city?', 
     //     choices: []
     // })
-    console.log(response.data)
+    console.log(response.data.categories)
 }).catch(err => console.log(err)); 
 
 
