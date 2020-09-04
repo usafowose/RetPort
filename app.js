@@ -48,9 +48,8 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
     }).then(answers => {
         console.log(answers['qualityOne']);
         for (let x in rawData) {
-            console.log(` index:${x}\n DataName:${rawData[x].name}\n myAnswer:${answers.qualityOne[0]}`)
-            if (rawData[x].name == answers.qualityOne[0]) {
-                console.log(rawData[x].score_out_of_10);
+            if (rawData[x].name === answers.qualityOne[0]) {
+                console.table(rawData[x]);
                 break;
             }
         }
