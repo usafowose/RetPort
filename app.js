@@ -20,26 +20,23 @@ console.table(` \n --------------- \n ${quotes[thisQuote]} \n --------------- \n
 // Sync File Read, JSON parsing,decoding and Assignment to Data Variable 
 let data = JSON.parse(
     fs.readFileSync('./user.txt', { encoding: 'utf-8' })
-);
+); 
 
 let userName = data.name
 let userStatus = data.status;
 let currentCity = data.current_city.toLowerCase();
 let desiredMove = data.desiredMove.toLowerCase().split(",")[0];
-// If city has two parts (i.e. Los Angeles, Las Vegas, etc split and rejoin with  )
+// If city has two parts (i.e. Los Angeles, San Francisco, etc split and rejoin with hyphen "-")
 if (desiredMove.split(" ")[1]) {
     desiredMove = `${desiredMove.split(" ").join('-')}`;
 }
-console.log(desiredMove);
-
-
+ console.log(`Searching...${desiredMove}`);
 
 
 // HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) 
-
 axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
     let rawData = response.data.categories;
-    console.log(rawData);
+    console.table(rawData);
     inquire.prompt({
         type: "checkbox",
         message: 'What is the most important quality of your retirement city?',
@@ -49,6 +46,7 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
         console.log(answers['qualityOne']);
         for (let x in rawData) {
             if (rawData[x].name === answers.qualityOne[0]) {
+                console.log(`\n In ${desiredMove.toUpperCase()}, This Is The Score In The ${rawData[x].name} Category: \n-------------------\n`)
                 console.table(rawData[x]);
                 break;
             }
@@ -57,10 +55,11 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
     });
 }).catch(err => console.log(err));
 
-
+console.log(encodeURI('https://content.guardianapis.com/search?q=debates'));
 // HTTP Get Request for Local News
-
-// axios.get('') 
+let query = ""
+let targetURL = `https://content.guardianapis.com/search?q=${query}`
+axios.get(encodeURI(targetURL)) 
 
 
 // HTTP Get Req for Certain Jobs ***Use Inquirer?
