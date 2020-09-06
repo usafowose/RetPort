@@ -1,3 +1,6 @@
+var fs = require('fs');   
+
+
 class Person {
 
     constructor(name, status, currentCity, desiredMove, jobNeeded) {
