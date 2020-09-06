@@ -2,41 +2,14 @@
 const inquirer = require("inquirer");
 const quotes = require("./quotes");
 const fs = require('fs');
-
+const Person = require('./person');
 const InputPrompt = require('inquirer/lib/prompts/input');
 const { type } = require('os');
 const { stat } = require('fs');
 const { start } = require("repl");
 
-// require("dotenv").config();
-
 // Set up inquirer for console queries and to capture inputs. ucfc
 
-// IMPORT THIS CLASS
-class Person {
-
-    constructor(name, status, currentCity, desiredMove, jobNeeded) {
-        this.name = name;
-        this.status = status;
-        this.currentCity = currentCity;
-        this.desiredMove = desiredMove;
-        this.jobNeeded = jobNeeded;
-    }
-    createObj() {
-        let userObj = {
-            name: this.name,
-            status: this.status,
-            current_city: this.currentCity,
-            desiredMove: this.desiredMove,
-            jobNeeded: this.jobNeeded
-        }
-        let stream = fs.createWriteStream('././user.txt');
-        stream.write(JSON.stringify(userObj));
-        // stream.end( () => {
-        //     console.log('Stream completed'); 
-        // }); 
-    }
-};
 var inquire = () => {
     inquirer.prompt([
         {
@@ -59,10 +32,10 @@ var inquire = () => {
             type: "input",
             message: "Where have you thought of retiring? (Up to 3, separated by semicolons i.e. Chicago, IL; Achorage, AL)",
             name: "destination_choics"
-        }, 
+        },
         {
-            type: 'confirm', 
-            message: 'Do you intend to find work in the city to which you retire?', 
+            type: 'confirm',
+            message: 'Do you intend to find work in the city to which you retire?',
             name: 'job_search'
         }
     ]).then(answers => {
@@ -77,11 +50,10 @@ var inquire = () => {
     }).catch((err) => {
         console.log(err)
     });
-
 };
 
 inquire();
-// module.exports = inquire; 
+// module.exports = inquire;
 // console.log(userName);
 
 
