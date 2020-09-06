@@ -1,4 +1,7 @@
-// Requiring dependencies
+// Configuring dotenv to read env vars and requiring dependencies
+
+require('dotenv').config();
+
 const axios = require('axios');
 const fs = require('fs');
 const keys = require("./Config/keys");
@@ -7,10 +10,12 @@ const { encode } = require('punycode');
 const quotes = require('./Model/quotes');
 const inquire = require('inquirer');
 
+
 // Importing API Keys from env for axios calls
 const jobsKey = keys.jobsKey
 const newsKey = keys.newsKey;
 
+console.log(keys)
 // Randomly selecting quotes to display to user 
 let quoteNum = Math.floor(Math.random() * 31);
 let thisQuote = `quote${quoteNum}`;
@@ -20,7 +25,7 @@ console.table(` \n --------------- \n ${quotes[thisQuote]} \n --------------- \n
 // Sync File Read, JSON parsing,decoding and Assignment to Data Variable 
 let data = JSON.parse(
     fs.readFileSync('./user.txt', { encoding: 'utf-8' })
-); 
+);
 
 let userName = data.name
 let userStatus = data.status;
@@ -30,7 +35,7 @@ let desiredMove = data.desiredMove.toLowerCase().split(",")[0];
 if (desiredMove.split(" ")[1]) {
     desiredMove = `${desiredMove.split(" ").join('-')}`;
 }
- console.log(`Searching...${desiredMove}`);
+console.log(`Searching...${desiredMove}`);
 
 
 // HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) 
@@ -55,11 +60,17 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
     });
 }).catch(err => console.log(err));
 
-console.log(encodeURI('https://content.guardianapis.com/search?q=debates'));
+
 // HTTP Get Request for Local News
-let query = ""
-let targetURL = `https://content.guardianapis.com/search?q=${query}`
-axios.get(encodeURI(targetURL)) 
+// let query = "jobs"
+// let targetURL = `https://content.guardianapis.com/search?q=${query}&api-key=${newsKey}`; 
+
+
+// axios.get(encodeURI(targetURL)).then(response => {
+//     console.log(response)
+// }).catch(err => {
+//     err ? console.log(err) : console.log(`no error`); 
+// })
 
 
 // HTTP Get Req for Certain Jobs ***Use Inquirer?
