@@ -8,9 +8,11 @@ const { type } = require('os');
 const { stat } = require('fs');
 const { start } = require("repl");
 
-require("dotenv").config();
+// require("dotenv").config();
 
 // Set up inquirer for console queries and to capture inputs. ucfc
+
+// IMPORT THIS CLASS
 class Person {
 
     constructor(name, status, currentCity, desiredMove, jobNeeded) {
