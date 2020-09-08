@@ -18,7 +18,6 @@ const newsKey = keys.newsKey;
 // Randomly selecting quotes to display to user 
 let quoteNum = Math.floor(Math.random() * 31);
 let thisQuote = `quote${quoteNum}`;
-
 console.table(` \n --------------- \n ${quotes[thisQuote]} \n --------------- \n `);
 
 // Sync File Read, JSON parsing,decoding and Assignment to Data Variable 
@@ -55,10 +54,12 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
         for (let x in rawData) {
             if (rawData[x].name === answers.qualityOne[0]) {
                 console.log(`\n In ${desiredMove.toUpperCase()}, This Is The Score In The ${rawData[x].name} Category: \n-------------------\n`)
-                console.table(rawData[x]);
+                console.table(rawData[x], '\n \n ');
                 break;
-            }
+            };
+            console.log(`Searching for news in ${desiredMove}`);
         }
+        setTimeout(()=> getNews(), 3000)
     });
 }).catch(err => console.log(err));
 
