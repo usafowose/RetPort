@@ -62,8 +62,6 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
         setTimeout(()=> getNews(), 3000)
     });
 }).catch(err => console.log(err));
-
-
 // HTTP Get Request for Local News
 var getNews = () => {
     let query = desiredMove;
