@@ -72,12 +72,12 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
 // HTTP Get Request for Local News
 var getNews = () => {
     let query = desiredMove;
-    let targetURL = `https://content.guardianapis.com/search?q=${query}&page-size=30&order-by=newest&api-key=${newsKey}&show-fields=shortUrl`;
+    let targetURL = `https://content.guardianapis.com/search?q=${query}&page-size=30&order-by=relevance&api-key=${newsKey}&show-fields=shortUrl`;
 
     // Get Request
     axios.get(encodeURI(targetURL)).then(response => {
         var responseData = response.data.response.results;
-        console.log(responseData); 
+        // console.log(responseData); 
         let userDataView = [];
 
 // Filtering search results for News Articles as opposed to Sports, Music, etc. Also extracting only articleTitle and WebUrl for user to view and potentially read article. 
@@ -85,7 +85,7 @@ var getNews = () => {
             if (responseData[x].pillarName === 'News') {
                 let obj = {};
                 obj.articleName = responseData[x].webTitle;
-                obj.webUrl = responseData[x].webUrl;
+                obj.webUrl = responseData[x].fields.shortUrl;
                 obj.publicationDate = moment(responseData[x].webPublicationDate).format("MMM Do YYYY")
                 userDataView.push(obj);
             }
