@@ -1,1 +1,1 @@
-{"name":"Andrew ","status":"Retired","current_city":"Miami, FL ","desiredMove":"Atlanta, GA","jobNeeded":true}
+{"name":null,"status":null,"current_city":null,"desiredMove":null,"jobNeeded":null}

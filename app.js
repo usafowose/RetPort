@@ -7,6 +7,7 @@ const keys = require("./Config/keys");
 const cTable = require('console.table');
 const { encode } = require('punycode');
 const quotes = require('./Model/quotes');
+// const ask = require('./Model/inquire');
 const inquire = require('inquirer');
 const { Console } = require('console')
 const moment = require('moment');
@@ -37,37 +38,39 @@ if (desiredMove.split(" ")[1]) {
 console.log(`Searching...${desiredMove} \n\n`);
 
 // HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) and filtering out the color
-axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
-    let rawData = response.data.categories;
-    for (i = 0; i < rawData.length; i++) {
-        delete (rawData[i].color);
-    };
-    console.table(rawData);
+var getCity = () => {
+    axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
+        let rawData = response.data.categories;
+        for (i = 0; i < rawData.length; i++) {
+            delete (rawData[i].color);
+        };
+        console.table(rawData);
 
-// Using inquirer to see which of the scores is most important to user
-    inquire.prompt({
-        type: "checkbox",
-        message: 'What is the most important quality of your retirement city?',
-        choices: ['Housing', 'Cost of Living', 'Startups', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom', 'Safety', 'Healthcare', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet Access', 'Leisure & Culture', 'Tolerance', 'Outdoors'],
-        name: 'qualityOne'
-    }).then(answers => {
-        for (let x in rawData) {
+        // Using inquirer to see which of the scores is most important to user
+        inquire.prompt({
+            type: "checkbox",
+            message: 'What is the most important quality of your retirement city?',
+            choices: ['Housing', 'Cost of Living', 'Startups', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom', 'Safety', 'Healthcare', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet Access', 'Leisure & Culture', 'Tolerance', 'Outdoors'],
+            name: 'qualityOne'
+        }).then(answers => {
+            for (let x in rawData) {
 
-            if (rawData[x].name === answers.qualityOne[0]) {
+                if (rawData[x].name === answers.qualityOne[0]) {
 
-                console.log(`\n In ${desiredMove.toUpperCase()}, This Is The Score In The ${rawData[x].name} Category:\n-------------------\n`)
-                console.table(rawData[x], '\n \n');
-                
-                console.log(`Searching for news in ${desiredMove}`)
-                break;
-                
-            };
-        }
-        // waiting 3 seconds to maxe axios call for news in selected city
-        setTimeout(() => getNews(), 3000)
-    });
-}).catch(err => console.log(err));
+                    console.log(`\n In ${desiredMove.toUpperCase()}, This Is The Score In The ${rawData[x].name} Category:\n-------------------\n`)
+                    console.table(rawData[x], '\n \n');
 
+                    console.log(`Searching for news in ${desiredMove}`)
+                    break;
+
+                };
+            }
+            // waiting 3 seconds to maxe axios call for news in selected city
+            setTimeout(() => getNews(), 3000)
+        });
+    }).catch(err => console.log(err)
+    )
+};
 
 // HTTP Get Request for Local News
 var getNews = () => {
@@ -80,7 +83,7 @@ var getNews = () => {
         // console.log(responseData); 
         let userDataView = [];
 
-// Filtering search results for News Articles as opposed to Sports, Music, etc. Also extracting only articleTitle and WebUrl for user to view and potentially read article. 
+        // Filtering search results for News Articles as opposed to Sports, Music, etc. Also extracting only articleTitle and WebUrl for user to view and potentially read article. 
         for (x in responseData) {
             if (responseData[x].pillarName === 'News') {
                 let obj = {};
@@ -90,12 +93,16 @@ var getNews = () => {
                 userDataView.push(obj);
             }
         }
-
         console.table(userDataView);
     }).catch(err => {
-    console.log(err)
+        console.log(err)
     })
 };
+
+if (userName) {
+    getCity(); 
+}
+// var getJobs = () => {};
 
 
 // HTTP Get Req for Certain Jobs ***Use Inquirer?
