@@ -7,8 +7,10 @@ const InputPrompt = require('inquirer/lib/prompts/input');
 const { type } = require('os');
 const { stat } = require('fs');
 const { start } = require("repl");
+const { error } = require("console");
 
 // Set up inquirer for console queries and to capture inputs. ucfc
+let persObj;
 
 var inquire = () => {
     inquirer.prompt([
@@ -45,15 +47,22 @@ var inquire = () => {
         let dest_choices = answers["destination_choics"];
         let jobNeeded = answers["job_search"];
 
-        let persObj = new Person(userName, status, current_city, dest_choices, jobNeeded);
-        persObj.createObj();
+        if (!userName || !status || !current_city || !dest_choices || jobNeeded === undefined) {
+            console.log('You must answer all questions');
+            answers = null;
+            persObj = new Person(null, null, null, null, null);
+            persObj.createObj();
+        } else {
+            let persObj = new Person(userName, status, current_city, dest_choices, jobNeeded);
+            persObj.createObj()
+        }
     }).catch((err) => {
         console.log(err)
     });
 };
 
 inquire();
-// module.exports = inquire;
+// module.exports = inquire();
 // console.log(userName);
 
 
