@@ -8,6 +8,8 @@ const cTable = require('console.table');
 const { encode } = require('punycode');
 const quotes = require('./Model/quotes');
 const inquire = require('inquirer');
+const { Console } = require('console')
+const moment = require('moment');
 
 // Importing API Keys from env for axios calls
 const jobsKey = keys.jobsKey
@@ -55,9 +57,11 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
 
                 console.log(`\n In ${desiredMove.toUpperCase()}, This Is The Score In The ${rawData[x].name} Category:\n-------------------\n`)
                 console.table(rawData[x], '\n \n');
+                
+                console.log(`Searching for news in ${desiredMove}`)
                 break;
+                
             };
-            console.log(`Searching for news in ${desiredMove}`);
         }
         // waiting 3 seconds to maxe axios call for news in selected city
         setTimeout(() => getNews(), 3000)
@@ -68,11 +72,12 @@ axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`)
 // HTTP Get Request for Local News
 var getNews = () => {
     let query = desiredMove;
-    let targetURL = `https://content.guardianapis.com/search?q=${query}&api-key=${newsKey}`;
+    let targetURL = `https://content.guardianapis.com/search?q=${query}&page-size=30&order-by=newest&api-key=${newsKey}&show-fields=shortUrl`;
 
     // Get Request
     axios.get(encodeURI(targetURL)).then(response => {
         var responseData = response.data.response.results;
+        console.log(responseData); 
         let userDataView = [];
 
 // Filtering search results for News Articles as opposed to Sports, Music, etc. Also extracting only articleTitle and WebUrl for user to view and potentially read article. 
@@ -81,6 +86,7 @@ var getNews = () => {
                 let obj = {};
                 obj.articleName = responseData[x].webTitle;
                 obj.webUrl = responseData[x].webUrl;
+                obj.publicationDate = moment(responseData[x].webPublicationDate).format("MMM Do YYYY")
                 userDataView.push(obj);
             }
         }
