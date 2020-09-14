@@ -1,1 +1,1 @@
-{"name":null,"status":null,"current_city":null,"desiredMove":null,"jobNeeded":null}
+{"name":"Andrew","status":"Retired","current_city":"Miami, FL ","desiredMove":"San Antonio, TX","jobNeeded":true}

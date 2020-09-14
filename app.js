@@ -60,7 +60,7 @@ var getCity = () => {
                     console.log(`\n In ${desiredMove.toUpperCase()}, This Is The Score In The ${rawData[x].name} Category:\n-------------------\n`)
                     console.table(rawData[x], '\n \n');
 
-                    console.log(`Searching for news in ${desiredMove}`)
+                    console.log(`Searching for news in ${desiredMove} \n ---------------------- \n`)
                     break;
 
                 };
