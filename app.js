@@ -29,7 +29,8 @@ let data = JSON.parse(
 let userName = data.name;
 let userStatus = data.status;
 let currentCity = data.current_city.toLowerCase();
-let desiredMove = data.desiredMove.trim().toLowerCase().split(",")[0];
+let desiredMove = data.desiredMove.trim().toLowerCase().split(",")[0]
+let jobNeeded = data.jobNeeded;
 
 // If city has two parts (i.e. Los Angeles, San Francisco, etc split and rejoin with hyphen "-")
 if (desiredMove.split(" ")[1]) {
@@ -67,10 +68,15 @@ var getCity = () => {
             }
             // waiting 3 seconds to maxe axios call for news in selected city
             setTimeout(() => getNews(), 3000)
+
+
+
         });
     }).catch(err => console.log(err)
     )
 };
+
+
 
 // HTTP Get Request for Local News
 var getNews = () => {
@@ -94,13 +100,22 @@ var getNews = () => {
             }
         }
         console.table(userDataView);
+
+        if (jobNeeded) { setTimeout(() => getJobs(), 3000) };
     }).catch(err => {
         console.log(err)
     })
 };
 
+var getJobs = () => {
+    
+
+    console.log(`\nJobs Results in ${desiredMove}:\n------------------------------\n`);
+
+}
+
 if (userName) {
-    getCity(); 
+    getCity();
 }
 // var getJobs = () => {};
 
