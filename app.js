@@ -108,19 +108,19 @@ var getNews = () => {
 };
 
 var getJobs = () => {
-    let jobsUrl = `https://data.usajobs.gov/api/search?Keyword=Software`
-    axios.get(jobsUrl, {
+    let jobsUrl = `https://data.usajobs.gov/api/search?LocationName=Baltimore, Marylandw`
+    axios.get(encodeURI(jobsUrl), {
         headers: {
-            'Host': 'data.usajobs.gov', 
-            'User-Agent': 'usafowose@gmail.com', 
-            'Authorization-Key': jobsKey,
-            'Page': 1, 
-            'ResultsPerPage': 20, 
-            'LocationName': desiredMove
+            'Host':'data.usajobs.gov', 
+            'User-Agent':'usafowose@gmail.com', 
+            'Authorization-Key':jobsKey,
+            'Page':1, 
+            'ResultsPerPage':20
         }
     }).then(response => {
         console.log(`\nJobs Results in ${desiredMove}:\n------------------------------\n`);
-        let rawData = response.data.SearchResult.SearchResultItems[0];
+        let rawData = response.data.SearchResult.SearchResultItems[0].MatchedObjectDescriptor;
+        // console.log(response)
         console.log(rawData);
     }).catch(err => {
         console.log(err);
