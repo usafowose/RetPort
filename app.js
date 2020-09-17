@@ -29,18 +29,20 @@ let data = JSON.parse(
 let userName = data.name;
 let userStatus = data.status;
 let currentCity = data.current_city.toLowerCase();
-let desiredMove = data.desiredMove.trim().toLowerCase().split(",")[0]
+let desiredMoveCity = data.desiredMove.trim().toLowerCase().split(",")[0];
+let desiredMoveState = data.desiredMove.trim().toUpperCase().split(",")[1];
 let jobNeeded = data.jobNeeded;
 
+console.log(desiredMoveState); 
 // If city has two parts (i.e. Los Angeles, San Francisco, etc split and rejoin with hyphen "-")
-if (desiredMove.split(" ")[1]) {
-    desiredMove = `${desiredMove.split(" ").join('-')}`;
+if (desiredMoveCity.split(" ")[1]) {
+    desiredMoveCity = `${desiredMoveCity.split(" ").join('-')}`;
 };
-console.log(`Searching...${desiredMove} \n\n`);
+console.log(`Searching...${desiredMoveCity} \n\n`);
 
 // HTTP Get Requests via Axios Package to TeleportAPI (Qual of Life Ratings) and filtering out the color
 var getCity = () => {
-    axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMove}/scores`).then(response => {
+    axios.get(`https://api.teleport.org/api/urban_areas/slug:${desiredMoveCity}/scores`).then(response => {
         let rawData = response.data.categories;
         for (i = 0; i < rawData.length; i++) {
             delete (rawData[i].color);
@@ -58,10 +60,10 @@ var getCity = () => {
 
                 if (rawData[x].name === answers.qualityOne[0]) {
 
-                    console.log(`\n In ${desiredMove.toUpperCase()}, This Is The Score In The ${rawData[x].name} Category:\n-------------------\n`)
+                    console.log(`\n In ${desiredMoveCity.toUpperCase()}, This Is The Score In The ${rawData[x].name} Category:\n-------------------\n`)
                     console.table(rawData[x], '\n \n');
 
-                    console.log(`Searching for news in ${desiredMove} \n ---------------------- \n`)
+                    console.log(`Searching for news in ${desiredMoveCity} \n ---------------------- \n`)
                     break;
 
                 };
@@ -80,7 +82,7 @@ var getCity = () => {
 
 // HTTP Get Request for Local News
 var getNews = () => {
-    let query = desiredMove;
+    let query = desiredMoveCity;
     let targetURL = `https://content.guardianapis.com/search?q=${query}&page-size=30&order-by=relevance&api-key=${newsKey}&show-fields=shortUrl`;
 
     // Get Request
@@ -108,7 +110,7 @@ var getNews = () => {
 };
 
 var getJobs = () => {
-    let jobsUrl = `https://data.usajobs.gov/api/search?LocationName=Baltimore, Marylandw`
+    let jobsUrl = `https://data.usajobs.gov/api/search?LocationName=Baltimore, Maryland`
     axios.get(encodeURI(jobsUrl), {
         headers: {
             'Host':'data.usajobs.gov', 
@@ -118,7 +120,7 @@ var getJobs = () => {
             'ResultsPerPage':20
         }
     }).then(response => {
-        console.log(`\nJobs Results in ${desiredMove}:\n------------------------------\n`);
+        console.log(`\nJobs Results in ${desiredMoveCity}:\n------------------------------\n`);
         let rawData = response.data.SearchResult.SearchResultItems[0].MatchedObjectDescriptor;
         // console.log(response)
         console.log(rawData);
