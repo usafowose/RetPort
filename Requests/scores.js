@@ -58,4 +58,4 @@ var getCity = () => {
     )
 };
 
-module.exports = { data, getCity }; 
+module.exports = getCity; 

@@ -2,7 +2,6 @@ const axios = require('axios');
 const keys = require("./../Config/keys");
 const newsKey = keys.newsKey;
 const moment = require('moment');
-const fs = require('fs');
 const getJobs = require('./jobs').getJobs; 
 const data = require('./jobs').data; 
 
