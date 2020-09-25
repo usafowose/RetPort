@@ -1,3 +1,4 @@
+require('dotenv').config();
 const axios = require('axios');
 const fs = require('fs');
 // Importing APi Keys from .env for axios calls
@@ -29,6 +30,14 @@ var getJobs = () => {
     }).then(response => {
         console.log(`\nJobs Results in ${desiredMoveCity}:\n------------------------------\n`);
         let rawData = response.data.SearchResult.SearchResultItems[0].MatchedObjectDescriptor;
+        delete rawData.PositionID; 
+        delete rawData.PositionLocation;
+        delete rawData.PositionFormattedDescription; 
+        delete rawData.UserArea;
+        delete rawData.JobCategory;
+        delete rawData.JobGrade; 
+        delete rawData.PositionSchedule;
+        delete rawData.PositionOfferingType; 
         // console.log(response)
         console.log(rawData);
     }).catch(err => {
@@ -38,5 +47,6 @@ var getJobs = () => {
    
 
 }; 
+getJobs();
 
 module.exports = {data, getJobs};
