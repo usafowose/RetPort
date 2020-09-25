@@ -4,9 +4,7 @@
 
 ## Based on the users' preferences, a JSON Object Model will be tailored for them that will represent what city is best and/or what their city of chouce has to offer them in retirement. 
 
-
-
-## Key Topics 
+### Key Implementations
   * Axios Calls
   * Readable and Writeable Streams 
   * Promises 
@@ -16,9 +14,8 @@
   * fs module in Node
   * Inquirer (questions in console)
   * Dotenv Package and Environment Variables 
-  * gitignore
   * MomentJS 
-  * Using and Building API's 
+  * Using API's 
 
   ## Web API's/ Sources
     1. Weather API (WeatherChannel)

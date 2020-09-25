@@ -30,6 +30,7 @@ var getJobs = () => {
     }).then(response => {
         console.log(`\nJobs Results in ${desiredMoveCity}:\n------------------------------\n`);
         let rawData = response.data.SearchResult.SearchResultItems[0].MatchedObjectDescriptor;
+        // deleting obj properties that are unnecessary for response
         delete rawData.PositionID; 
         delete rawData.PositionLocation;
         delete rawData.PositionFormattedDescription; 
@@ -38,13 +39,12 @@ var getJobs = () => {
         delete rawData.JobGrade; 
         delete rawData.PositionSchedule;
         delete rawData.PositionOfferingType; 
-        // console.log(response)
+
         console.log(rawData);
     }).catch(err => {
         console.log(err);
     });
 
-   
 
 }; 
 

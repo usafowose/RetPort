@@ -11,13 +11,8 @@ let desiredMoveCity = data.desiredMove.trim().toLowerCase().split(",")[0];
 let desiredMoveState = data.desiredMove.trim().toUpperCase().split(",")[1];
 let jobNeeded = data.jobNeeded;
 
-// console.log(desiredMoveState);
-// // If city has two parts (i.e. Los Angeles, San Francisco, etc split and rejoin with hyphen "-")
-// if (desiredMoveCity.split(" ")[1]) {
-//     desiredMoveCity = `${desiredMoveCity.split(" ").join('-')}`;
-// };
-// console.log(`Searching...${desiredMoveCity} \n\n`);
-
+// Teleport Get Request 
+// If city has two parts (i.e. Los Angeles, San Francisco, etc split and rejoin with hyphen "-")
 var getCity = () => {
     if (desiredMoveCity.split(" ")[1]) {
         desiredMoveCity = `${desiredMoveCity.split(" ").join('-')}`;

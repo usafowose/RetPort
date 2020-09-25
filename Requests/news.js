@@ -13,7 +13,7 @@ let desiredMoveCity = data.desiredMove.trim().toLowerCase().split(",")[0];
 let desiredMoveState = data.desiredMove.trim().toUpperCase().split(",")[1];
 let jobNeeded = data.jobNeeded;
 
-
+// Guardian API Call Function (get request)
 var getNews = () => {
     let query = desiredMoveCity;
     let targetURL = `https://content.guardianapis.com/search?q=${query}&page-size=30&order-by=relevance&api-key=${newsKey}&show-fields=shortUrl`;
