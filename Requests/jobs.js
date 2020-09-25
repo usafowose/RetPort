@@ -47,6 +47,5 @@ var getJobs = () => {
    
 
 }; 
-getJobs();
 
 module.exports = {data, getJobs};
